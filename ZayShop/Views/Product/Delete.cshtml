@@ -1,0 +1,39 @@
+﻿@model ZayShop.Models.ProductModel
+
+@{
+    ViewData["Title"] = "Delete Product";
+}
+
+<h2 class="mt-4 mb-3 text-danger">Bu məhsulu silmək istədiyinizdən əminsiniz mi?</h2>
+
+<div class="card mb-4 shadow">
+    <div class="row g-0">
+        @if (!string.IsNullOrEmpty(Model.ImageName))
+        {
+            <div class="col-md-4">
+                <img src="~/assets/img/products/@Model.ImageName" class="img-fluid rounded-start" alt="@Model.Name" />
+            </div>
+        }
+        <div class="col-md-8">
+            <div class="card-body">
+                <h4 class="card-title text-dark">@Model.Name</h4>
+                <p class="card-text"><strong>Açıqlama:</strong> @Model.Description</p>
+                <p class="card-text"><strong>Rəylərin sayı:</strong> @Model.ReviewCount</p>
+                <p class="card-text"><strong>Qiymət:</strong> @Model.Price.ToString("C")</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="d-flex gap-3">
+        <button type="submit" class="btn btn-danger">
+            <i class="bi bi-trash"></i> Sil
+        </button>
+        <a asp-action="Index" class="btn btn-secondary">
+            Geri
+        </a>
+    </div>
+</form>

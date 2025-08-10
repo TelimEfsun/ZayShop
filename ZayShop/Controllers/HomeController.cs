@@ -22,29 +22,8 @@ public class HomeController : Controller
     {
 
         var sliders = await _context.Sliders.ToListAsync();
-       
-
-        var categories = new List<CategoryModel>
-        {
-            new CategoryModel
-            {
-                Id=1,
-                Name="Watches",
-                Image="category_img_01.jpg"
-            },
-            new CategoryModel
-            {
-                Id=2,
-                Name="Shoes",
-                Image="category_img_02.jpg"
-            },
-            new CategoryModel
-            {
-                Id=3,
-                Name="Accessories",
-                Image="category_img_03.jpg"
-            }
-        };  
+        var categories = await _context.Categories.ToListAsync();
+      
         var products = new List<ProductModel>
         {
             new ProductModel
@@ -52,7 +31,7 @@ public class HomeController : Controller
                 Id=1,
                 Name="Gym Weight",
                 Description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt in culpa qui officia deserunt.",
-                Image="feature_prod_01.jpg",
+                ImageName="feature_prod_01.jpg",
                 ReviewCount= 24,
                 Price= 240
             },
@@ -61,7 +40,7 @@ public class HomeController : Controller
                 Id=2,
                 Name="Cloud Nike Shoes",
                 Description="Aenean gravida dignissim finibus. Nullam ipsum diam, posuere vitae pharetra sed, commodo ullamcorper.",
-                Image="feature_prod_02.jpg",
+                ImageName="feature_prod_02.jpg",
                 ReviewCount= 48,
                 Price= 480
             },
@@ -70,7 +49,7 @@ public class HomeController : Controller
                 Id=3,
                 Name="Summer Addides Shoes",
                 Description="Curabitur ac mi sit amet diam luctus porta. Phasellus pulvinar sagittis diam, et scelerisque ipsum lobortis nec.",
-                Image="feature_prod_03.jpg",
+                ImageName="feature_prod_03.jpg",
                 ReviewCount= 74,
                 Price= 360
             }
@@ -80,7 +59,7 @@ public class HomeController : Controller
         {
             Sliders = sliders,
             Categories = categories,
-            Products = products            
+            Products = products
         };
 
         return View(homeviewmodel);

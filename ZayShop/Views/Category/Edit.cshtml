@@ -1,0 +1,72 @@
+﻿@model CategoryModel
+
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-warning text-dark">
+            <h4 class="mb-0">Məhsulu Redaktə Et</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="ImageName" />
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="Name" class="form-label">Ad</label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ImageName" class="form-label">Açıqlama</label>
+                    <textarea asp-for="ImageName" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="ImageName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Yeni Şəkil Yüklə</label>
+                    <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" onchange="previewImage(event)" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+
+                @if (!string.IsNullOrEmpty(Model.ImageName))
+                {
+                    <div class="mb-3">
+                        <label class="form-label">Mövcud Şəkil:</label>
+                        <div class="mb-2">
+                            <img src="~/assets/img/category/@Model.ImageName" alt="Mövcud Şəkil" class="img-thumbnail" style="max-height: 200px;" />
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="deleteImage" name="DeleteImage" />
+                            <label class="form-check-label" for="deleteImage">Şəkli sil</label>
+                        </div>
+                    </div>
+                }
+
+                <div class="mb-3">
+                    <label class="form-label">Yeni Şəkil Önizləmə</label>
+                    <img id="imagePreview" src="#" style="display:none; max-height: 200px;" class="img-thumbnail" />
+                </div>
+
+                <button type="submit" class="btn btn-primary">Yadda Saxla</button>
+                <a asp-action="Index" class="btn btn-secondary">Geri</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('imagePreview');
+                output.src = reader.result;
+                output.style.display = 'block';
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+}

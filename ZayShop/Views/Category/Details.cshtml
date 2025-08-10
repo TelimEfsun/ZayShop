@@ -1,0 +1,27 @@
+﻿@model ZayShop.Models.CategoryModel
+
+@{
+    ViewData["Title"] = "Category Details";
+}
+
+<h2 class="mt-4 mb-3">Category Details</h2>
+
+<div class="card mb-4 shadow">
+    <div class="row g-0">
+        @if (!string.IsNullOrEmpty(Model.ImageName))
+        {
+            <div class="col-md-4">
+                <img src="~/assets/img/category/@Model.ImageName" alt="@Model.Name" class="img-fluid rounded-start" />
+            </div>
+        }
+        <div class="col-md-8">
+            <div class="card-body">
+                <h4 class="card-title">@Model.Name</h4>
+                <p class="card-text"><strong>Description:</strong> @Model.Name</p>
+                <p class="card-text"><strong>Review Count:</strong> @Model.ImageName</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a asp-action="Index" class="btn btn-outline-primary">⬅ Back to List</a>
